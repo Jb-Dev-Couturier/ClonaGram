@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap');
+
+$font-1: 'Istok Web', sans-serif;
+$font-2: 'Overpass', sans-serif;
+$font-3: 'Yanone Kaffeesatz', sans-serif;
+
+$color-1: #0091ff;
+$color-2: #00c3ff;
+$color-3: #00162c;
+$color-4: rgb(146, 190, 255);
+$color-5: #f0f0f090;
+$black: rgb(40, 40, 40);
+$white: rgba(244, 244, 244, 0.816);
+$shadow: rgb(190, 218, 192);
+
+* {
+  font-family: $font-2;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  &::selection {
+    background: $color-1;
+    color: $white;
+  }
+}
