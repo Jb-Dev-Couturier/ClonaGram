@@ -1,0 +1,15 @@
+.LoginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+
+  small {
+    a {
+      color: $color-5;
+      text-decoration: none;
+      color: $color-1;
+    }
+  }
+}

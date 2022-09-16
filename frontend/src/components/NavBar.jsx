@@ -8,7 +8,7 @@ import { MdOutlinePostAdd } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import defaulProfil from '../styles/assets/defaultProfile.png';
 
-const NavBar = ({ setAlert, userConected }) => {
+const NavBar = ({ setAlert }) => {
   const [user, setUser] = useState('');
 
   return (
