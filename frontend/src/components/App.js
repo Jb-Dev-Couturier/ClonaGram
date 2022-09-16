@@ -11,7 +11,7 @@ import NavBar from './NavBar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="fill-parent">
       <BrowserRouter>
       <NavBar/>
         <Routes>

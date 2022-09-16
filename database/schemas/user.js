@@ -19,8 +19,13 @@ export default {
       type: 'string',
     },
     {
-      name: 'email',
+      name: 'password',
+      type: 'string',
+      hidden: true,
+    },
+    {
       title: 'Email',
+      name: 'email',
       type: 'string',
       validation: (Rule) =>
         Rule.custom((email) => {
@@ -55,17 +60,17 @@ export default {
     {
       title: 'Anniversaire',
       name: 'birthday',
-      type: 'text',
+      type: 'string',
     },
     {
       title: 'Vie à',
       name: 'livesin',
-      type: 'text',
+      type: 'string',
     },
     {
       title: 'Travail à',
       name: 'workat',
-      type: 'text',
+      type: 'string',
     },
     {
       title: 'Following',
