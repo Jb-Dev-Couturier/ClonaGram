@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import functions from './apiCalls.js';
 
-
-const { createUser, getProfile, createPost } = functions;
+const { createUser, getProfile, createPost, getPostsOfFollowing, getAllPosts } =
+  functions;
 
 const app = express();
 app.use(bodyParser.json());
@@ -39,6 +39,20 @@ app.get('/getProfile', (req, res) => {
 app.post('/createPost', upload.single('file'), (req, res) => {
   const body = req.body;
   createPost(body.user, body.caption, req.file).then((data) => res.json(data));
+});
+
+app.get('/getPostsOfFollowing', (req, res) => {
+  const user = req.query.user;
+  getPostsOfFollowing(user).then((data) => {
+    var posts = data[0].following
+    posts = posts.map((post)=> post.posts)
+    posts = posts.flat(1)
+    res.json(posts)
+  }).catch((err)=>res.json([]));
+});
+
+app.get('/getAllPosts', (req, res) => {
+  getAllPosts().then((data) => res.json(data));
 });
 
 app.listen(3001, () => console.log('serveur demaree'));

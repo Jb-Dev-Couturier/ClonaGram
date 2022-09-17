@@ -20,7 +20,13 @@ function App() {
   return (
     <div className="fill-parent">
       <BrowserRouter>
-        <Navbar collapseOnSelect expand="md" variant="dark" className="NavBar">
+        <Navbar
+          collapseOnSelect
+          expand="md"
+          variant="dark"
+          className="NavBar"
+          style={{ position: 'sticky' }}
+        >
           <Container fluid>
             <LinkContainer to="/">
               <Navbar.Brand>
@@ -84,7 +90,7 @@ function App() {
           <AlertDismissible {...alert} deleteAlert={() => setAlert(null)} />
         ) : null}
         <Routes>
-          <Route element={<AllPosts />} path="/" exact />
+          <Route element={<AllPosts user={user} />} path="/" exact />
           <Route
             element={<Login setAlert={setAlert} setUser={setUser} />}
             path="/login"

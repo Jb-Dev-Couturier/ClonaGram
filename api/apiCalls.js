@@ -49,10 +49,13 @@ functions.getUserId = (user) => {
 };
 
 functions.createPost = async (user, caption, image) => {
-  const data = await sanityClient.assets
-    .upload('image', createReadStream(image.path), {
+  const data = await sanityClient.assets.upload(
+    'image',
+    createReadStream(image.path),
+    {
       filename: basename(image.path),
-    });
+    }
+  );
   const ids = await functions.getUserId(user);
   const id = ids[0]._id;
   return await sanityClient.create({
@@ -62,6 +65,42 @@ functions.createPost = async (user, caption, image) => {
     description: caption,
     created_at: new Date(),
   });
+};
+
+functions.getAllPosts = () => {
+  return sanityClient.fetch(`*[_type == "post"]{
+    ...,
+    "like":count(like),
+    "likers":*[_type == "user" && references(^._id)],
+    "username": author->username,
+    photo{
+      asset->{
+        _id,
+        url
+      }
+    }
+  }`);
+};
+
+functions.getPostsOfFollowing = (username) => {
+  return sanityClient.fetch(
+    `*[_type == "user" && username == $username]{
+    following[]->{
+      "posts": [_type == "post" && references(^._id)]{
+        ...,
+        "like":count(like),
+        "likers":*[_type == "user" && references(^._id)],
+        "username": author->username,
+        photo{
+          asset->{
+            _id,
+            url
+          }
+      }
+    }
+  }`,
+    { username }
+  );
 };
 
 export default functions;
