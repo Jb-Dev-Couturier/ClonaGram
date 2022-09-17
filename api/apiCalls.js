@@ -73,6 +73,13 @@ functions.getAllPosts = () => {
     "like":count(like),
     "likers":*[_type == "user" && references(^._id)],
     "username": author->username,
+    "email": author->email,
+    "profileImage": author->photo{
+      asset->{
+        _id,
+        url
+      }
+    },
     photo{
       asset->{
         _id,
@@ -91,6 +98,13 @@ functions.getPostsOfFollowing = (username) => {
         "like":count(like),
         "likers":*[_type == "user" && references(^._id)],
         "username": author->username,
+        "email": author->email,
+        "profileImage": author->photo{
+      asset->{
+        _id,
+        url
+      }
+    },
         photo{
           asset->{
             _id,
