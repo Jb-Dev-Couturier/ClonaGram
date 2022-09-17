@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
-import { height } from '@mui/system';
 import Bookmark from '../styles/assets/bookmark.png';
 import Comment from '../styles/assets/bookmark.png';
 import Dot from '../styles/assets/dot.png';
@@ -9,7 +7,6 @@ import HeartFull from '../styles/assets/heart_red.png';
 import HeartEmpty from '../styles/assets/heart.png';
 import Share from '../styles/assets/share.png';
 import Profil from '../styles/assets/defaultProfile.png';
-import Image from '../styles/assets/bg.jpg';
 
 export default function AllPosts({ user }) {
   const [allPostsData, setAllPostsData] = useState(null);
@@ -49,11 +46,15 @@ export default function AllPosts({ user }) {
                     className="cover"
                   />
                 </div>
-                <h3 style={{ textTransform: 'capitalize' }}>
-                  {post.username}
-                  <br />
-                  <span style={{ textTransform: 'initial' }}>{post.email}</span>
-                </h3>
+                <Link to={'/profile/' + post.username} style={{textDecoration:'none'}}>
+                  <h3 style={{ textTransform: 'capitalize' }}>
+                    {post.username}
+                    <br />
+                    <span style={{ textTransform: 'initial' }}>
+                      {post.email}
+                    </span>
+                  </h3>
+                </Link>
               </div>
               <div className="">
                 <img src={Dot} alt="dotpic" className="dot" />
@@ -78,7 +79,7 @@ export default function AllPosts({ user }) {
               </div>
             </div>
             <h4 className="likes">
-              {post.like ? post.like.length : '0'} Likes
+              {post.likers ? post.likers.length : '0'} Likes
             </h4>
             <h4 className="message" style={{ textTransform: 'capitalize' }}>
               <b>{post.username}:</b>

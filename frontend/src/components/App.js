@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { GiWorld, GiArchiveResearch, GiTargetPoster } from 'react-icons/gi';
+import { FcNews, FcSearch, FcAddImage } from 'react-icons/fc';
 
 import AllPosts from './AllPosts';
 import AlertDismissible from './AlertDismissible';
@@ -12,7 +12,6 @@ import Profile from './Profile';
 import Search from './Search';
 import SignUp from './SignUp';
 import defaulProfil from '../styles/assets/defaultProfile.png';
-import { FcNews, FcSearch, FcAddImage } from 'react-icons/fc';
 
 import { SiInstagram } from 'react-icons/si';
 function App() {
