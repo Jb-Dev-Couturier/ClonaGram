@@ -21,7 +21,30 @@ export default function CreatePost({ user, setAlert }) {
   function uploadFile(e) {
     setFile(e.target.files[0])
   }
-  function makePost() {}
+  function makePost() {
+    const formData = new FormData()
+    formData.append('user',user)
+    formData.append('caption',caption)
+    formData.append('file', file)
+    const requestOptions = {
+      method:"POST",
+      body:formData
+    }
+    fetch('/createPost', requestOptions)
+      .then((_res) => {
+        setAlert({
+          variant: 'success',
+          message: 'Votre post a été partager Merci !',
+        });
+        navigate('/');
+      })
+      .catch((err) =>
+        setAlert({
+          variant: 'danger',
+          message: err.message,
+        })
+      );
+  }
 
   return (
     <Form className="post-Form Post">

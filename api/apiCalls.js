@@ -1,4 +1,6 @@
+import { createReadStream } from 'fs';
 import sanityClient from './client.js';
+import { basename } from 'path';
 
 const functions = {};
 
@@ -14,7 +16,7 @@ functions.createUser = (username, firstname, lastname, email, password) => {
   });
 };
 
-functions.getProfile =(user)=>{
+functions.getProfile = (user) => {
   return sanityClient.fetch(
     `*[_type == "user" && email == $email]{
     ...,
@@ -33,8 +35,33 @@ functions.getProfile =(user)=>{
       },
     },
   }`,
-    {email:user}
+    { email: user }
   );
-}
+};
 
-export default functions
+functions.getUserId = (user) => {
+  return sanityClient.fetch(
+    `*[_type == "user" && username == $username]{
+      _id
+    }`,
+    { username: user }
+  );
+};
+
+functions.createPost = async (user, caption, image) => {
+  const data = await sanityClient.assets
+    .upload('image', createReadStream(image.path), {
+      filename: basename(image.path),
+    });
+  const ids = await functions.getUserId(user);
+  const id = ids[0]._id;
+  return await sanityClient.create({
+    _type: 'post',
+    author: { _ref: id },
+    photo: { asset: { _ref: data._id } },
+    description: caption,
+    created_at: new Date(),
+  });
+};
+
+export default functions;
