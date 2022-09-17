@@ -12,6 +12,7 @@ import Profile from './Profile';
 import Search from './Search';
 import SignUp from './SignUp';
 import defaulProfil from '../styles/assets/defaultProfile.png';
+import { FcNews, FcSearch, FcAddImage } from 'react-icons/fc';
 
 import { SiInstagram } from 'react-icons/si';
 function App() {
@@ -39,17 +40,17 @@ function App() {
               <Nav className="me-auto">
                 <LinkContainer to="/">
                   <Nav.Link>
-                    <GiWorld /> Journal
+                    <FcNews /> Journal
                   </Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/search">
                   <Nav.Link>
-                    <GiArchiveResearch /> Rechercher
+                    <FcSearch /> Rechercher
                   </Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/create-post">
                   <Nav.Link>
-                    <GiTargetPoster /> Poster
+                    <FcAddImage /> Poster
                   </Nav.Link>
                 </LinkContainer>
               </Nav>
