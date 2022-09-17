@@ -13,7 +13,7 @@ export default function Login({setAlert, setUser}) {
       .then((data) => {
         if (data.length>0){
           setAlert({variant:"success", message:'Connexion Reussie Amusez Vous bien !'})
-          setUser(data[0].email)
+          setUser(data[0].username)
           navigate('/')
         }else{
           setAlert({variant:"danger", message:'Utilisateur incorrect !'})
@@ -22,7 +22,7 @@ export default function Login({setAlert, setUser}) {
   }
 
   return (
-    <Form className="LoginForm">
+    <Form className="center-Form">
       <Form.Group className="mb-3">
         <Form.Label>Email</Form.Label>
         <Form.Control

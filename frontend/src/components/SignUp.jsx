@@ -56,7 +56,7 @@ export default function SignUp({ setAlert, setUser }) {
   }
 
   return (
-    <Form className="signUpForm">
+    <Form className="center-Form">
       {/* username */}
       <Form.Group className="mb-4">
         <Form.Label>Pseudo</Form.Label>

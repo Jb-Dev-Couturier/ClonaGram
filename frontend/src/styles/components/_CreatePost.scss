@@ -1,0 +1,67 @@
+.Post {
+  .createPost {
+    min-width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+
+    .container-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .upload-image {
+        width: 300px;
+        height: 300px;
+        padding: .5rem;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 20px;
+        -webkit-box-shadow: -10px 0px 13px -7px #000000,
+          10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+        box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000,
+          5px 5px 15px 5px rgba(0, 0, 0, 0);
+      }
+      .upload-image-none {
+        display: none;
+      }
+    }
+
+    .icon {
+      position: relative;
+      display: flex;
+      align-self: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 150px;
+      width: 100%;
+      height: 150px;
+      input {
+        width: 160px;
+        height: 160px;
+        z-index: 1;
+        position: absolute;
+        opacity: 0;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+    }
+    .iconSvg {
+      position: absolute;
+      height: 150px;
+      width: 150px;
+      padding: 1rem;
+      border-radius: 25px;
+    }
+
+    .post-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .post-button {
+        width: 100%;
+      }
+    }
+  }
+}

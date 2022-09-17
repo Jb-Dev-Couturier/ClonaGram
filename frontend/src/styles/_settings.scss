@@ -44,3 +44,33 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.center-Form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.post-Form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.profilPicture{
+  width: 40px;
+  height: 40px;
+}
+
+.NavBar{
+  -webkit-box-shadow: 0px 12px 12px -1px rgba(0, 0, 0, 0.27);
+    box-shadow: 0px 12px 12px -1px rgba(0, 0, 0, 0.27);
+    background: $color-1;
+  .LogoNav{
+    font-size: 2.0rem;
+  }
+}
+
