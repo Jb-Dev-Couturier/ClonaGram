@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -15,8 +15,12 @@ import defaulProfil from '../styles/assets/defaultProfile.png';
 
 import { SiInstagram } from 'react-icons/si';
 function App() {
+  
   const [alert, setAlert] = useState(null);
   const [user, setUser] = useState("")
+
+
+
   return (
     <div className="fill-parent">
       <BrowserRouter>
@@ -57,11 +61,7 @@ function App() {
                 {user ? (
                   <Navbar.Text>
                     Bienvenue:{' '}
-                    <img
-                      src={defaulProfil}
-                      alt="userPic"
-                      className="profilPicture"
-                    />{' '}
+                    
                     <Link to={'/profile/' + user}>{user}</Link> |{' '}
                     <Button
                       type="button"
