@@ -3,41 +3,36 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function Login({setAlert, setUser}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   function handleLogin(e) {
-    fetch('/getProfile?user=' + email)
+    fetch('/getProfile?user=' + username)
       .then((res) => res.json())
       .then((data) => {
-        if (data.length>0){
-          setAlert({variant:"success", message:'Connexion Reussie Amusez Vous bien !'})
-          setUser(data[0].username)
-          navigate('/')
-        }else{
-          setAlert({variant:"danger", message:'Utilisateur incorrect !'})
+        if (data.length > 0) {
+          setAlert({
+            variant: 'success',
+            message: 'Connexion Reussie Amusez Vous bien !',
+          });
+          setUser(data[0].username);
+          navigate('/');
+        } else {
+          setAlert({ variant: 'danger', message: 'Utilisateur incorrect !' });
         }
-      }).catch((err)=> setAlert({variant:"danger", message:err.message}))
+      })
+      .catch((err) => setAlert({ variant: 'danger', message: err.message }));
   }
 
   return (
     <Form className="center-Form">
       <Form.Group className="mb-3">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>Pseudo</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Email"
+          placeholder="Pseudo"
           onInput={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <Form.Label>Mot de Passe</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Mot de passe"
-          onInput={(e) => {
-            setPassword(e.target.value);
+            setUsername(e.target.value);
           }}
         />
         <small>

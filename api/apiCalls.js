@@ -18,7 +18,7 @@ functions.createUser = (username, firstname, lastname, email, password) => {
 
 functions.getProfile = (user) => {
   return sanityClient.fetch(
-    `*[_type == "user" && email == $email]{
+    `*[_type == "user" && username == $username]{
     ...,
     "following":count(following),
     "followers":*[_type == "user" && references(^._id)],
@@ -35,7 +35,7 @@ functions.getProfile = (user) => {
       },
     },
   }`,
-    { email: user }
+    { username: user }
   );
 };
 
@@ -105,14 +105,14 @@ functions.getPostsOfFollowing = (username) => {
         url
       }
     },
-        photo{
-          asset->{
-            _id,
-            url
-          }
+    photo{
+      asset->{
+        _id,
+        url
       }
     }
-  }`,
+  }
+}`,
     { username }
   );
 };
@@ -129,6 +129,22 @@ functions.searchForUsername = (text) => {
     }
   }
 }`
+  );
+};
+
+functions.getPosts = (username) => {
+  return sanityClient.fetch(
+    `*[_type == "post" && author->username == $username]{
+    ...,
+    "username": author->username,
+    photo{
+      asset->{
+        _id,
+        url
+      }
+    }
+  }`,
+    { username }
   );
 };
 

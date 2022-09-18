@@ -99,7 +99,10 @@ function App() {
             element={<SignUp setAlert={setAlert} setUser={setUser} />}
             path="/sign-up"
           />
-          <Route element={<Profile />} path="/profile/:username" />
+          <Route
+            element={<Profile user={user} setAlert={setAlert} />}
+            path="/profile/:username"
+          />
           <Route element={<Search />} path="/search" />
           <Route
             element={<CreatePost user={user} setAlert={setAlert} />}
