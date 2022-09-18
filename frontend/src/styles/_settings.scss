@@ -4,10 +4,11 @@ $font-1: 'Istok Web', sans-serif;
 $font-2: 'Overpass', sans-serif;
 $font-3: 'Yanone Kaffeesatz', sans-serif;
 
-$color-1: #0091ff;
+$color-1: #2fa5ff;
+$color-1-alt: #0091ff;
 $color-2: #00c3ff;
 $color-3: #00162c;
-$color-4: rgb(146, 190, 255);
+$color-4: #92beff;
 $color-5: #989898;
 $black: rgb(40, 40, 40);
 $white: rgba(244, 244, 244, 0.816);
@@ -19,6 +20,7 @@ $shadow: rgb(190, 218, 192);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all .5s ease-in-out;
   &::selection {
     background: $color-1;
     color: $white;
@@ -68,7 +70,7 @@ body {
 .NavBar{
   -webkit-box-shadow: 0px 12px 12px -1px rgba(0, 0, 0, 0.27);
     box-shadow: 0px 12px 12px -1px rgba(0, 0, 0, 0.27);
-    background: $color-1;
+    background: $color-1-alt;
     z-index: 999;
     position: fixed;
     top: 0;

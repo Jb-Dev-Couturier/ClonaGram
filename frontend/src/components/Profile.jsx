@@ -21,9 +21,9 @@ export default function Profile({ user, setAlert }) {
   const [editing, setEditing] = useState(false);
   const params = useParams();
 
-    useEffect(() => {
-      updateProfile(params.username);
-    }, [params.username, user]);
+  useEffect(() => {
+    updateProfile(params.username);
+  }, [params.username, user]);
 
   function updateFollowing(profile) {
     for (let follower of profile.followers) {
@@ -34,7 +34,6 @@ export default function Profile({ user, setAlert }) {
     }
     setFollowing(false);
   }
-
 
   function updateProfile(username) {
     fetch('/getProfile?user=' + username)
@@ -87,72 +86,77 @@ export default function Profile({ user, setAlert }) {
           />
         </div>
         <div className="verticalDataContainer">
-          <div className="vertical-data">
-            <p>
+          {/* Bio utilisateurs */}
+          <div className="profileBio">
+            <div className="profile-name">
+              <strong>Nom/Prenom : </strong>
+              <span>
+                {(profileData.first_name ? profileData.first_name : '') +
+                  '' +
+                  (profileData.last_name ? profileData.last_name : '')}
+              </span>
+            </div>
+            <div className="profile-name">
+              <strong>Email : </strong>
+              <span>{profileData.email ? profileData.email : ''}</span>
+            </div>
+            <div className="profile-text">{profileData.bio}</div>
+            <div className="profileDetail">
+              <div className="profile-name">
+                <strong>Anniversaire : </strong>
+                <span>{profileData.birthday}</span>
+              </div>
+              <div className="profile-name">
+                <strong>Domicile : </strong>
+                <span>{profileData.livesin}</span>
+              </div>
+              <div className="profile-name">
+                <strong>Travail : </strong>
+                <span>{profileData.workat}</span>
+              </div>
+            </div>
+          </div>
+          <div className="data-container">
+            <div className="vertical-data">
               <strong>Post</strong>
-            </p>
-            <h4>{posts ? posts.length : '0'}</h4>
-          </div>
-          <div className="vertical-data">
-            <p>
+
+              <h4>{posts ? posts.length : '0'}</h4>
+            </div>
+            <div className="vertical-data">
               <strong>Abonné(es)</strong>
-            </p>
-            <h4>
-              {profileData.followers ? profileData.followers.length : '0'}
-            </h4>
-          </div>
-          <div className="vertical-data">
-            <p>
+
+              <h4>
+                {profileData.followers ? profileData.followers.length : '0'}
+              </h4>
+            </div>
+            <div className="vertical-data">
               <strong>Abonnement(s)</strong>
-            </p>
-            <h4>{profileData.following ? profileData.following : '0'}</h4>
-          </div>
-          <div className="follow-button">
-            {user && !owner ? (
-              <Button
-                variant={following ? 'danger' : 'warning'}
-                onClick={followClick}
-              >
-                {following ? 'Désabonner' : `S'abonné`}
-              </Button>
-            ) : null}
-            {user && owner ? (
-              <Button variant="primary" onClick={() => setEditing(true)}>
-                Editer
-              </Button>
-            ) : null}
+
+              <h4>{profileData.following ? profileData.following : '0'}</h4>
+            </div>
+            <div className="follow-button">
+              {user && !owner ? (
+                <Button
+                  variant={following ? 'danger' : 'warning'}
+                  onClick={followClick}
+                >
+                  {following ? 'Désabonner' : `S'abonné`}
+                </Button>
+              ) : null}
+              {user && owner ? (
+                <Button
+                  variant="primary"
+                  onClick={() => setEditing(true)}
+                  className="editButton"
+                >
+                  Editer
+                </Button>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Bio utilisateurs */}
-      <div className="profileBio">
-        <div className="profile-name">
-          <strong>Nom/Prenom : </strong>
-          {(profileData.first_name ? profileData.first_name : '') +
-            '' +
-            (profileData.last_name ? profileData.last_name : '')}
-        </div>
-        <div className="profileInfo">
-          <strong>Email : </strong>
-          {profileData.email ? profileData.email : ''}
-        </div>
-        <div className="profile-text">{profileData.bio}</div>
-        <div className="profileDetail">
-          <div className="birthday">
-            <strong>Anniverssaire : </strong>
-            <span>{profileData.birthday}</span>
-          </div>
-          <div className="livesin">
-            <strong>Domicile : </strong>
-            <span>{profileData.livesin}</span>
-          </div>
-          <div className="workat">
-            <strong>Travail : </strong>
-            <span>{profileData.workat}</span>
-          </div>
-        </div>
-      </div>
       {/* afficher les post utilisateurs */}
       <div className="profile-posts-wrapper">
         <div className="profile-posts">
@@ -202,7 +206,6 @@ export default function Profile({ user, setAlert }) {
                       src={post.like ? HeartFull : HeartEmpty}
                       alt="like-button"
                       className="Heart"
-                      
                     />
                     <img src={Comment} alt="commentIcon" />
                     <img src={Share} alt="shareIcon" />

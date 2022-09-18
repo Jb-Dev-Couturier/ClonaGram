@@ -1,9 +1,23 @@
 .profile {
+  width: 1100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
   margin-top: 3rem;
+  @media screen and(max-width: 1100px){
+          width: 750px;
+         }
+  @media screen and(max-width: 770px){
+          width: 450px;
+         }
+  @media screen and(max-width: 500px){
+          width: 350px;
+         }
+  @media screen and(max-width: 280px){
+          width: 250px;
+         }
   .profileData {
     width: 100%;
     text-align: center;
@@ -11,46 +25,188 @@
       position: relative;
       #profil-img {
         position: absolute;
-        top: 10%;
-        
-        left: 10%;
+        top: 25%;
+        left: 40%;
         z-index: 200;
         width: 200px;
         height: 200px;
         border-radius: 50%;
         object-fit: cover;
         border: 5px solid #fff;
+        @media screen and(max-width: 770px){
+          top: 15%;
+        left: 28%;
+         }
+        @media screen and(max-width: 500px){
+          top: 15%;
+        left: 20%;
+         }
+        @media screen and(max-width: 280px){
+        width: 100px;
+        height: 100px;
+        top: 25%;
+        left: 30%;
+         }
+        
       }
       #cover-img {
-        
-        width: 90%;
-        height: 250px;
+        width: 100%;
+        height: 350px;
         border-radius: 20px;
+        @media screen and(max-width: 500px){
+          height: 250px;
+         }
       }
     }
 
     .verticalDataContainer {
-        
-        margin: 1rem 5rem;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      
+      gap: 1rem;
+      @media screen and(max-width: 770px){
+          flex-direction: column;
+          
+         }
+      @media screen and(max-width: 280px){
+          flex-direction: column;
+          width: 250px;
+         }
+
+      .data-container {
         display: flex;
-        justify-content: space-around;
         align-items: center;
-        
-        
+        justify-content: space-around;
+        flex: 2;
+        min-height: 160px;
+        background-image: radial-gradient(
+            circle at 67% 83%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 1%,
+            transparent 1%,
+            transparent 5%,
+            transparent 5%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 24% 80%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 27%,
+            transparent 27%,
+            transparent 63%,
+            transparent 63%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 23% 5%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 26%,
+            transparent 26%,
+            transparent 82%,
+            transparent 82%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 21% 11%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 35%,
+            transparent 35%,
+            transparent 45%,
+            transparent 45%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 10% 11%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 21%,
+            transparent 21%,
+            transparent 81%,
+            transparent 81%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 19% 61%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 20%,
+            transparent 20%,
+            transparent 61%,
+            transparent 61%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 13% 77%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 63%,
+            transparent 63%,
+            transparent 72%,
+            transparent 72%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 30% 93%,
+            hsla(317, 0%, 96%, 0.05) 0%,
+            hsla(317, 0%, 96%, 0.05) 33%,
+            transparent 33%,
+            transparent 82%,
+            transparent 82%,
+            transparent 100%
+          ),
+          linear-gradient(90deg, rgb(51, 134, 255), rgb(47, 165, 255));
+        padding: 1rem;
+        border-radius: 20px;
+        @media screen and(max-width: 280px){
+          flex-direction: column;
+          width: 250px;
+         }
         .vertical-data {
-            position: relative;
-            
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+
+          h4 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 4px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #fff;
+            color: $color-1;
+          }
+        }
+        .editButton {
+          background-color: #fff;
+          color: $color-1;
+          border: 1px solid $color-1;
+
+          &:hover {
+            background-color: $color-1;
+            color: #fff;
+            border: 1px solid #fff;
+          }
+        }
+      }
+      .profileBio {
+        flex: 1;
+        position: relative;
+        text-align: left;
+        background: #fff;
+        border: 1px solid $color-1;
+        padding: 1rem;
+        border-radius: 20px;
+        min-height: 160px;
+
+        .profile-name {
+          strong {
+            font-size: 1.1rem;
+          }
+        }
       }
     }
-  }
-  .profileBio {
-    position: absolute;
-    top: 22%;
-    left:21%;
-    text-align: left;
-    background: #fff;
-    padding: 1rem;
-    border-radius: 20px;
   }
 
   //card post
@@ -63,6 +219,19 @@
     border-radius: initial;
     box-shadow: 2px 5px 30px rgba(0, 0, 0, 0.25);
     padding: 20px;
+    margin-bottom: 1rem;
+    @media screen and(max-width: 1100px){
+          width: 750px;
+         }
+    @media screen and(max-width: 770px){
+          width: 450px;
+         }
+    @media screen and(max-width: 500px){
+          width: 350px;
+         }
+    @media screen and(max-width: 280px){
+          width: 250px;
+         }
 
     .top {
       display: flex;
