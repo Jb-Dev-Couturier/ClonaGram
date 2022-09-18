@@ -10,13 +10,7 @@ import Profil from '../styles/assets/defaultProfile.png';
 
 export default function AllPosts({ user }) {
   const [allPostsData, setAllPostsData] = useState(null);
-  const [like, setLike] = useState(false);
-
-  const setLikedHeart = () => {
-    setLike((prev) => !prev);
-    console.log(allPostsData);
-  };
-
+  
   useEffect(() => {
     if (!user) {
       fetch('/getAllPosts')
@@ -46,7 +40,10 @@ export default function AllPosts({ user }) {
                     className="cover"
                   />
                 </div>
-                <Link to={'/profile/' + post.username} style={{textDecoration:'none'}}>
+                <Link
+                  to={'/profile/' + post.username}
+                  style={{ textDecoration: 'none' }}
+                >
                   <h3 style={{ textTransform: 'capitalize' }}>
                     {post.username}
                     <br />
@@ -66,10 +63,10 @@ export default function AllPosts({ user }) {
             <div className="actionBtns">
               <div className="left">
                 <img
-                  src={like ? HeartFull : HeartEmpty}
+                  src={post.like ? HeartFull : HeartEmpty}
                   alt="like-button"
                   className="Heart"
-                  onClick={setLikedHeart}
+                  
                 />
                 <img src={Comment} alt="commentIcon" />
                 <img src={Share} alt="shareIcon" />
@@ -78,9 +75,7 @@ export default function AllPosts({ user }) {
                 <img src={Bookmark} alt="bookmarkIcon" />
               </div>
             </div>
-            <h4 className="likes">
-              {post.likers ? post.likers.length : '0'} Likes
-            </h4>
+            <h4 className="likes">{post.like ? post.like : '0'} Likes</h4>
             <h4 className="message" style={{ textTransform: 'capitalize' }}>
               <b>{post.username}:</b>
               <br />

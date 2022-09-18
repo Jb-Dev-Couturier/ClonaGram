@@ -19,7 +19,6 @@ export default function Profile({ user, setAlert }) {
   const [following, setFollowing] = useState(false);
   const [owner, setOwner] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [like, setLike] = useState(false);
   const params = useParams();
 
     useEffect(() => {
@@ -64,17 +63,13 @@ export default function Profile({ user, setAlert }) {
 
   function hideEditCallback() {}
 
-    const setLikedHeart = () => {
-      setLike((prev) => !prev);
-    };
-
   if (profileData === {}) return null;
 
   return (
     <div className="profile">
       {/* Data utilisateurs */}
       <div className="profileData">
-            <h3>Profil de @{profileData.username}</h3>
+        <h3>Profil de @{profileData.username}</h3>
         <div className="imgcontainer">
           <img
             src={profileData.photo ? profileData.photo.asset.url : defaulProfil}
@@ -92,40 +87,41 @@ export default function Profile({ user, setAlert }) {
           />
         </div>
         <div className="verticalDataContainer">
-
-        <div className="vertical-data">
-          <p>
-            <strong>Post</strong>
-          </p>
-          <h4>{posts ? posts.length : '0'}</h4>
-        </div>
-        <div className="vertical-data">
-          <p>
-            <strong>Abonné(es)</strong>
-          </p>
-          <h4>{profileData.followers ? profileData.followers.length : '0'}</h4>
-        </div>
-        <div className="vertical-data">
-          <p>
-            <strong>Abonnement(s)</strong>
-          </p>
-          <h4>{profileData.following ? profileData.following : '0'}</h4>
-        </div>
-        <div className="follow-button">
-          {user && !owner ? (
-            <Button
-              variant={following ? 'danger' : 'warning'}
-              onClick={followClick}
-            >
-              {following ? 'Désabonner' : `S'abonné`}
-            </Button>
-          ) : null}
-          {user && owner ? (
-            <Button variant="primary" onClick={() => setEditing(true)}>
-              Editer
-            </Button>
-          ) : null}
-        </div>
+          <div className="vertical-data">
+            <p>
+              <strong>Post</strong>
+            </p>
+            <h4>{posts ? posts.length : '0'}</h4>
+          </div>
+          <div className="vertical-data">
+            <p>
+              <strong>Abonné(es)</strong>
+            </p>
+            <h4>
+              {profileData.followers ? profileData.followers.length : '0'}
+            </h4>
+          </div>
+          <div className="vertical-data">
+            <p>
+              <strong>Abonnement(s)</strong>
+            </p>
+            <h4>{profileData.following ? profileData.following : '0'}</h4>
+          </div>
+          <div className="follow-button">
+            {user && !owner ? (
+              <Button
+                variant={following ? 'danger' : 'warning'}
+                onClick={followClick}
+              >
+                {following ? 'Désabonner' : `S'abonné`}
+              </Button>
+            ) : null}
+            {user && owner ? (
+              <Button variant="primary" onClick={() => setEditing(true)}>
+                Editer
+              </Button>
+            ) : null}
+          </div>
         </div>
       </div>
 
@@ -139,7 +135,7 @@ export default function Profile({ user, setAlert }) {
         </div>
         <div className="profileInfo">
           <strong>Email : </strong>
-          {(profileData.email ? profileData.email : '')}
+          {profileData.email ? profileData.email : ''}
         </div>
         <div className="profile-text">{profileData.bio}</div>
         <div className="profileDetail">
@@ -203,10 +199,10 @@ export default function Profile({ user, setAlert }) {
                 <div className="actionBtns">
                   <div className="left">
                     <img
-                      src={like ? HeartFull : HeartEmpty}
+                      src={post.like ? HeartFull : HeartEmpty}
                       alt="like-button"
                       className="Heart"
-                      onClick={setLikedHeart}
+                      
                     />
                     <img src={Comment} alt="commentIcon" />
                     <img src={Share} alt="shareIcon" />
@@ -215,9 +211,7 @@ export default function Profile({ user, setAlert }) {
                     <img src={Bookmark} alt="bookmarkIcon" />
                   </div>
                 </div>
-                <h4 className="likes">
-                  {post.likers ? post.likers.length : '0'} Likes
-                </h4>
+                <h4 className="likes">{post.like ? post.like : '0'} Likes</h4>
                 <h4 className="message" style={{ textTransform: 'capitalize' }}>
                   <b>{post.username}:</b>
                   <br />

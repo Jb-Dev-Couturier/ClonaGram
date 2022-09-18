@@ -137,6 +137,14 @@ functions.getPosts = (username) => {
     `*[_type == "post" && author->username == $username]{
     ...,
     "username": author->username,
+    "profileImage": author->photo{
+      asset->{
+        _id,
+        url
+      }
+    },
+    "like":count(like),
+    "likers":*[_type == "user" && references(^._id)],
     photo{
       asset->{
         _id,
