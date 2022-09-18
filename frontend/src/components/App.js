@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -11,7 +11,7 @@ import Login from './Login';
 import Profile from './Profile';
 import Search from './Search';
 import SignUp from './SignUp';
-import defaulProfil from '../styles/assets/defaultProfile.png';
+
 
 import { SiInstagram } from 'react-icons/si';
 function App() {

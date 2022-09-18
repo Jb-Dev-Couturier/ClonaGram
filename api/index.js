@@ -11,6 +11,7 @@ const {
   getAllPosts,
   searchForUsername,
   getPosts,
+  updateProfile,
 } = functions;
 
 const app = express();
@@ -71,5 +72,23 @@ app.get(`/getPosts`, (req,res)=>{
   const user = req.query.user
   getPosts(user).then((data) => res.json(data));
 })
+
+app.post('/updateProfile', upload.single('file'), (req, res) => {
+  const body = req.body;
+  updateProfile(
+    body.user,
+    body.first_name,
+    body.last_name,
+    body.username,
+    body.email,
+    body.bio,
+    body.birthday,
+    body.livesin,
+    body.workat,
+    req.file
+  ).then((data) => res.json(data));
+});
+
+
 
 app.listen(3001, () => console.log('serveur demaree'));

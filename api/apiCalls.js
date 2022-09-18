@@ -137,6 +137,7 @@ functions.getPosts = (username) => {
     `*[_type == "post" && author->username == $username]{
     ...,
     "username": author->username,
+    "email": author->email,
     "profileImage": author->photo{
       asset->{
         _id,
@@ -154,6 +155,60 @@ functions.getPosts = (username) => {
   }`,
     { username }
   );
+};
+
+functions.updateProfile = (
+  user,
+  first_name,
+  last_name,
+  username,
+  email,
+  bio,
+  birthday,
+  livesin,
+  workat,
+  image
+) => {
+  if (image) {
+    return sanityClient.assets
+      .upload('image', createReadStream(image.path), {
+        filename: basename(image.path),
+      })
+      .then((data) =>
+        functions.getUserId(user).then((ids) =>
+          sanityClient
+            .patch(ids[0]._id)
+            .set({
+              first_name,
+              last_name,
+              username,
+              email,
+              bio,
+              birthday,
+              livesin,
+              workat,
+              photo: { asset: { _ref: data._id } },
+            })
+            .commit()
+        )
+      );
+  } else {
+    return functions.getUserId(user).then((ids) =>
+      sanityClient
+        .patch(ids[0]._id)
+        .set({
+          first_name,
+          last_name,
+          username,
+          email,
+          bio,
+          birthday,
+          livesin,
+          workat,
+        })
+        .commit()
+    );
+  }
 };
 
 export default functions;

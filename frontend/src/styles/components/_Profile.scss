@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-  margin-top: 3rem;
+  margin-top: 1rem;
   @media screen and(max-width: 1100px){
           width: 750px;
          }
@@ -15,7 +15,7 @@
   @media screen and(max-width: 500px){
           width: 350px;
          }
-  @media screen and(max-width: 280px){
+  @media screen and(max-width: 360px){
           width: 250px;
          }
   .profileData {
@@ -41,7 +41,7 @@
           top: 15%;
         left: 20%;
          }
-        @media screen and(max-width: 280px){
+        @media screen and(max-width: 360px){
         width: 100px;
         height: 100px;
         top: 25%;
@@ -70,7 +70,7 @@
           flex-direction: column;
           
          }
-      @media screen and(max-width: 280px){
+      @media screen and(max-width: 360px){
           flex-direction: column;
           width: 250px;
          }
@@ -156,9 +156,13 @@
           linear-gradient(90deg, rgb(51, 134, 255), rgb(47, 165, 255));
         padding: 1rem;
         border-radius: 20px;
-        @media screen and(max-width: 280px){
+        @media screen and(max-width: 770px){
+          
+          width: 100%;
+         }
+        @media screen and(max-width: 500px){
           flex-direction: column;
-          width: 250px;
+          width: 100%;
          }
         .vertical-data {
           display: flex;
@@ -200,6 +204,11 @@
         border-radius: 20px;
         min-height: 160px;
 
+        @media screen and(max-width: 770px){
+          
+          width: 100%;
+         }
+
         .profile-name {
           strong {
             font-size: 1.1rem;
@@ -229,7 +238,7 @@
     @media screen and(max-width: 500px){
           width: 350px;
          }
-    @media screen and(max-width: 280px){
+    @media screen and(max-width: 360px){
           width: 250px;
          }
 
@@ -278,6 +287,9 @@
       width: 100%;
       height: 320px;
       margin: 10px 0 15px;
+      @media screen and(max-width: 360px){
+          height: 200px;
+         }
       .cover {
         position: absolute;
         top: 0;

@@ -23,6 +23,7 @@ export default function Profile({ user, setAlert }) {
 
   useEffect(() => {
     updateProfile(params.username);
+    // eslint-disable-next-line
   }, [params.username, user]);
 
   function updateFollowing(profile) {
@@ -60,15 +61,24 @@ export default function Profile({ user, setAlert }) {
 
   function followClick() {}
 
-  function hideEditCallback() {}
+  function hideEditCallback() {
+    updateProfile(params.username);
+    setEditing(false);
+  }
 
   if (profileData === {}) return null;
 
   return (
     <div className="profile">
       {/* Data utilisateurs */}
+      <EditProfile
+        user={user}
+        show={editing}
+        hideCallback={hideEditCallback}
+        profileData={profileData}
+        setAlert={setAlert}
+      />
       <div className="profileData">
-        <h3>Profil de @{profileData.username}</h3>
         <div className="imgcontainer">
           <img
             src={profileData.photo ? profileData.photo.asset.url : defaulProfil}
@@ -85,6 +95,8 @@ export default function Profile({ user, setAlert }) {
             id="cover-img"
           />
         </div>
+        <h1>Profil de {profileData.username}</h1>
+        <div className="profile-text"><h5>{profileData.bio}</h5></div>
         <div className="verticalDataContainer">
           {/* Bio utilisateurs */}
           <div className="profileBio">
@@ -100,7 +112,6 @@ export default function Profile({ user, setAlert }) {
               <strong>Email : </strong>
               <span>{profileData.email ? profileData.email : ''}</span>
             </div>
-            <div className="profile-text">{profileData.bio}</div>
             <div className="profileDetail">
               <div className="profile-name">
                 <strong>Anniversaire : </strong>
@@ -176,18 +187,13 @@ export default function Profile({ user, setAlert }) {
                         className="cover"
                       />
                     </div>
-                    <Link
-                      to={'/profile/' + post.username}
-                      style={{ textDecoration: 'none' }}
-                    >
                       <h3 style={{ textTransform: 'capitalize' }}>
                         {post.username}
                         <br />
                         <span style={{ textTransform: 'initial' }}>
                           {post.email}
                         </span>
-                      </h3>
-                    </Link>
+                      </h3> 
                   </div>
                   <div className="">
                     <img src={Dot} alt="dotpic" className="dot" />
