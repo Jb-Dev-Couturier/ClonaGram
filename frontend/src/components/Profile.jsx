@@ -73,15 +73,15 @@ export default function Profile({ user, setAlert }) {
   return (
     <div className="profile">
       {/* Data utilisateurs */}
-      <h3>@{profileData.username}</h3>
       <div className="profileData">
+            <h3>Profil de @{profileData.username}</h3>
         <div className="imgcontainer">
           <img
             src={profileData.photo ? profileData.photo.asset.url : defaulProfil}
             alt="user-pic"
             id="profil-img"
           />
-          {/* <img
+          <img
             src={
               profileData.photocover
                 ? profileData.photocover.asset.url
@@ -89,8 +89,10 @@ export default function Profile({ user, setAlert }) {
             }
             alt="cover-pic"
             id="cover-img"
-          /> */}
+          />
         </div>
+        <div className="verticalDataContainer">
+
         <div className="vertical-data">
           <p>
             <strong>Post</strong>
@@ -115,7 +117,7 @@ export default function Profile({ user, setAlert }) {
               variant={following ? 'danger' : 'warning'}
               onClick={followClick}
             >
-              {following ? 'Désabonner' : 'Abonné'}
+              {following ? 'Désabonner' : `S'abonné`}
             </Button>
           ) : null}
           {user && owner ? (
@@ -123,6 +125,7 @@ export default function Profile({ user, setAlert }) {
               Editer
             </Button>
           ) : null}
+        </div>
         </div>
       </div>
 
