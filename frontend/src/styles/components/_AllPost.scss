@@ -72,17 +72,17 @@
         position: relative;
         border-radius: 20px;
         width: 100%;
-        min-height: 300px;
-        object-fit: cover;
+        height: 400px;
+        object-fit: contain;
         margin-bottom: 1rem;
         @media screen and(max-width: 1050px){
-          min-height: 200px;
+          height: 300px;
          }
         @media screen and(max-width: 650px){
-          min-height: 100px;
+          height: 200px;
          }
         @media screen and(max-width: 280px){
-          min-height: 90px;
+          height: 100px;
          }
       }
     }
