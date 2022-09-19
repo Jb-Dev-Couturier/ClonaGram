@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import EditProfile from './EditProfile';
-import { Link } from 'react-router-dom';
 
 import Bookmark from '../styles/assets/bookmark.png';
 import Comment from '../styles/assets/bookmark.png';
@@ -59,7 +58,33 @@ export default function Profile({ user, setAlert }) {
       .catch((err) => console.error(err));
   }
 
-  function followClick() {}
+  function followClick() {
+    if (owner) return;
+
+    if (!following) {
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: user, id: profileData._id }),
+      };
+      fetch('/addFollower', requestOptions)
+        .then((res) => res.json())
+        .then((_data) => updateProfile(params.username));
+    } else {
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: user, id: profileData._id }),
+      };
+      fetch('/removeFollower', requestOptions)
+        .then((res) => res.json())
+        .then((_data) => updateProfile(params.username));
+    }
+  }
 
   function hideEditCallback() {
     updateProfile(params.username);

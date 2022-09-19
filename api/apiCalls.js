@@ -1,6 +1,7 @@
 import { createReadStream } from 'fs';
 import sanityClient from './client.js';
 import { basename } from 'path';
+import { nanoid } from 'nanoid';
 
 const functions = {};
 
@@ -93,26 +94,27 @@ functions.getPostsOfFollowing = (username) => {
   return sanityClient.fetch(
     `*[_type == "user" && username == $username]{
     following[]->{
-      "posts": [_type == "post" && references(^._id)]{
+      "posts": *[_type == "post" && references(^._id)]{
         ...,
+        "username": author->username,
         "like":count(like),
         "likers":*[_type == "user" && references(^._id)],
-        "username": author->username,
         "email": author->email,
         "profileImage": author->photo{
-      asset->{
-        _id,
-        url
-      }
-    },
-    photo{
-      asset->{
-        _id,
-        url
+          asset->{
+            _id,
+            url
+          }
+        },
+        photo{
+          asset->{
+            _id,
+            url
+          }
+        }
       }
     }
-  }
-}`,
+  }`,
     { username }
   );
 };
@@ -209,6 +211,27 @@ functions.updateProfile = (
         .commit()
     );
   }
+};
+
+functions.addFollower = (user, followingId) => {
+  return functions.getUserId(user).then((ids) =>
+    sanityClient
+      .patch(ids[0]._id)
+      .setIfMissing({ following: [] })
+      .insert('after', 'following[-1]', [
+        { _ref: followingId, _key: nanoid(), _type: 'reference' },
+      ])
+      .commit()
+  );
+};
+
+functions.removeFollower = (user, followingId) => {
+  return functions.getUserId(user).then((ids) =>
+    sanityClient
+      .patch(ids[0]._id)
+      .unset([`following[_ref=="${followingId}"]`])
+      .commit()
+  );
 };
 
 export default functions;

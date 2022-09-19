@@ -164,4 +164,36 @@
   
     }
   }
+
+  .noLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+      h4{
+        color: $color-1;
+        @media screen and(max-width: 350px){
+            font-size: 0.9rem;
+           }
+      }
+      h5{
+        @media screen and(max-width: 350px){
+            font-size: 0.9rem;
+           }
+      }
+    .loginGif{
+      transition: all .5s ease-in-out;
+      height: 400px;
+      width: 400px;
+      @media screen and(max-width: 550px){
+            height: 300px;
+            width: 300px;
+           }
+      @media screen and(max-width: 350px){
+            height: 200px;
+            width: 200px;
+           }
+    }
+  }
+
 }

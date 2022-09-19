@@ -12,6 +12,8 @@ const {
   searchForUsername,
   getPosts,
   updateProfile,
+  addFollower,
+  removeFollower,
 } = functions;
 
 const app = express();
@@ -51,27 +53,29 @@ app.post('/createPost', upload.single('file'), (req, res) => {
 
 app.get('/getPostsOfFollowing', (req, res) => {
   const user = req.query.user;
-  getPostsOfFollowing(user).then((data) => {
-    var posts = data[0].following
-    posts = posts.map((post)=> post.posts)
-    posts = posts.flat(1)
-    res.json(posts)
-  }).catch((err)=>res.json([]));
+  getPostsOfFollowing(user)
+    .then((data) => {
+      var posts = data[0].following;
+      posts = posts.map((post) => post.posts);
+      posts = posts.flat(1);
+      res.json(posts);
+    })
+    .catch((err) => res.json([]));
 });
 
 app.get('/getAllPosts', (req, res) => {
   getAllPosts().then((data) => res.json(data));
 });
 
-app.get(`/searchForUsername`, (req,res)=>{
-  const text =req.query.text
-  searchForUsername(text).then((data)=>res.json(data))
-})
+app.get(`/searchForUsername`, (req, res) => {
+  const text = req.query.text;
+  searchForUsername(text).then((data) => res.json(data));
+});
 
-app.get(`/getPosts`, (req,res)=>{
-  const user = req.query.user
+app.get(`/getPosts`, (req, res) => {
+  const user = req.query.user;
   getPosts(user).then((data) => res.json(data));
-})
+});
 
 app.post('/updateProfile', upload.single('file'), (req, res) => {
   const body = req.body;
@@ -89,6 +93,13 @@ app.post('/updateProfile', upload.single('file'), (req, res) => {
   ).then((data) => res.json(data));
 });
 
-
+app.post('/addFollower', (req, res) => {
+  const body = req.body;
+  addFollower(body.user, body.id).then((data) => res.json(data));
+});
+app.delete('/removeFollower', (req, res) => {
+  const body = req.body;
+  removeFollower(body.user, body.id).then((data) => res.json(data));
+});
 
 app.listen(3001, () => console.log('serveur demaree'));

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import Bookmark from '../styles/assets/bookmark.png';
 import Comment from '../styles/assets/bookmark.png';
 import Dot from '../styles/assets/dot.png';
@@ -7,21 +8,19 @@ import HeartFull from '../styles/assets/heart_red.png';
 import HeartEmpty from '../styles/assets/heart.png';
 import Share from '../styles/assets/share.png';
 import Profil from '../styles/assets/defaultProfile.png';
+import LoginGif from '../styles/assets/login.gif';
+
+
 
 export default function AllPosts({ user }) {
-  const [allPostsData, setAllPostsData] = useState(null);
-  
+  const [allPostsData, setAllPosts] = useState(null);
+
   useEffect(() => {
-    if (!user) {
+    if (user) {
       fetch('/getAllPosts')
         .then((res) => res.json())
-        .then((data) => setAllPostsData(data))
-        .catch((err) => console.log(err.message));
-    } else {
-      fetch('/getPostsOfFollowing?user=' + user)
-        .then((res) => res.json())
-        .then((data) => setAllPostsData(data))
-        .catch((err) => console.log(err.message));
+        .then((data) => setAllPosts(data))
+        .catch((err) => console.error(err));
     }
   }, [user]);
   return (
@@ -66,7 +65,6 @@ export default function AllPosts({ user }) {
                   src={post.like ? HeartFull : HeartEmpty}
                   alt="like-button"
                   className="Heart"
-                  
                 />
                 <img src={Comment} alt="commentIcon" />
                 <img src={Share} alt="shareIcon" />
@@ -96,7 +94,11 @@ export default function AllPosts({ user }) {
           </div>
         ))
       ) : (
-        <p>Pas de post a afficher</p>
+        <div className='noLogin'>
+          <h4>Pas de post à afficher</h4>
+          <img src={LoginGif} alt="login-gif" className='loginGif' />
+          <h5>Connectez-vous a votre compte</h5>
+        </div>
       )}
     </div>
   );
